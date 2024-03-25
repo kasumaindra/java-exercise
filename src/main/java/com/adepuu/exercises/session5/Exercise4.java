@@ -15,17 +15,6 @@ public class Exercise4 {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Ask the user to input the array values
-//        System.out.print("Enter the number of elements in the array: ");
-//        int length = scanner.nextInt();
-//
-//        int[] arr = new int[length];
-//        System.out.println("Enter the elements of the array:");
-//
-//        for (int i = 0; i < length; i++) {
-//            arr[i] = scanner.nextInt();
-//        }
-
         System.out.print("Enter the number of element in the array : ");
         int length = scanner.nextInt();
 
