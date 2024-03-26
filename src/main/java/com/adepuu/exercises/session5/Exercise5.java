@@ -19,18 +19,18 @@ public class Exercise5 {
             arr [i] = scanner.nextInt();
         }
 
-        descendingValue(arr);
 
-//        System.out.println("Input Direction : (asc / desc)");
-//        String direc = scanner.next();
+        // input Direction : Ascending / Descending
+        System.out.println("Input Direction : (asc / desc)");
+        String direc = scanner.next();
 
-//        if(direc.equalsIgnoreCase("asc")){
-//            ascendingValue(arr);
-//        }else if(direc.equalsIgnoreCase("desc")){
-//            descendingValue(arr);
-//        }else{
-//            System.out.println("Unrecognize input");
-//        }
+        if(direc.equalsIgnoreCase("asc")){
+            ascendingValueValue(arr);
+        }else if(direc.equalsIgnoreCase("desc")){
+            descendingValue(arr);
+        }else{
+            System.out.println("Unrecognize input");
+        }
 
 
 
@@ -42,6 +42,26 @@ public class Exercise5 {
             for (int j = i +1; j < arr.length; j++){
 
                 if (arr[i] <= arr[j]){
+                    int temp = arr[j];
+                    arr[j] = arr[i];
+                    arr[i] = temp;
+                }
+
+            }
+        }
+
+        System.out.println("Update Array : ");
+        for (int result : arr){
+            System.out.print(result + " ");
+        }
+    }
+
+    public static void ascendingValueValue(int [] arr){
+        for (int i = 0; i < arr.length; i++){
+
+            for (int j = i +1; j < arr.length; j++){
+
+                if (arr[i] >= arr[j]){
                     int temp = arr[j];
                     arr[j] = arr[i];
                     arr[i] = temp;
