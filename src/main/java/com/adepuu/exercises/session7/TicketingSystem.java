@@ -1,5 +1,7 @@
 package com.adepuu.exercises.session7;
 
+import java.util.UUID;
+
 public class TicketingSystem {
     /**
      * Write a Java Program using OOP about simple ticketing system for an event.
@@ -18,7 +20,33 @@ public class TicketingSystem {
      * <p>
      * Start your project from the main method below ;) have fun!
      */
-    public static void main(String[] args) {
 
+
+    public static void main(String[] args) {
+        int maxItem = 10;
+        UUID uuid = UUID.randomUUID();
+        String name = uuid.toString();
+
+        //user book tiket an even
+        Event event = new Event(maxItem);
+
+        for (int i = 0; i < 50; i++) {
+            User user = new User(name);
+
+            //user boking tiket event
+            boolean bookingStatus = event.bookTicket(user.getID());
+            if(bookingStatus){
+                var confirmedTicket = event.confirmTicket(user.getID());
+                if (confirmedTicket != null){
+                    user.saveTicket(confirmedTicket);
+                }
+            }
+
+            var accuiredTicket = user.getTicket();
+            if (accuiredTicket != null){
+                System.out.println(user.getName() + " Ticket ID: "+ accuiredTicket.getID()+ " Even ID: "+ accuiredTicket.getEventID());
+            }
+
+        }
     }
 }
