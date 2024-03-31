@@ -44,108 +44,11 @@ public class App {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        ArrayList<UserApp> users = new ArrayList<UserApp>();
-        UserApp currentUser = null;
 
-        System.out.println("Welcome to the To-Do List program!");
+        Auth auth = new Auth();
+        Menu menu = new Menu(scanner, auth);
+        menu.authPrompt();
 
-        boolean running = true;
-        while (running) {
-            System.out.println("\nMenu:");
-            System.out.println("1. Register");
-            System.out.println("2. Login");
-            System.out.println("3. Add task");
-            System.out.println("4. Delete task");
-            System.out.println("5. Display tasks");
-            System.out.println("6. Logout");
-            System.out.println("7. Exit");
-
-            System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (choice) {
-                case 1:
-                    System.out.print("Enter a username: ");
-                    String regUsername = scanner.nextLine();
-
-                    boolean existingUser = users.stream().anyMatch(user -> user.getUsername().equals(regUsername));
-                    if (existingUser) {
-                        System.out.println("Username already exists!");
-                    } else {
-                        System.out.print("Enter a password: ");
-                        String regPassword = scanner.nextLine();
-
-                        UserApp newUser = new UserApp(regUsername, regPassword);
-                        users.add(newUser);
-                        System.out.println("Registration successful!");
-                    }
-                    break;
-
-                case 2:
-                    System.out.print("Enter your username: ");
-                    String loginUsername = scanner.nextLine();
-                    System.out.print("Enter your password: ");
-                    String loginPassword = scanner.nextLine();
-
-                    UserApp existingUser2 = users.stream()
-                            .filter(user -> user.getUsername().equals(loginUsername) && user.getPassword().equals(loginPassword))
-                            .findAny()
-                            .orElse(null);
-
-                    if (existingUser2 == null) {
-                        System.out.println("Invalid username or password!");
-                    } else {
-                        currentUser = existingUser2;
-                        System.out.println("Login successful!");
-                    }
-                    break;
-
-                case 3:
-                    if (currentUser == null) {
-                        System.out.println("Please login first!");
-                    } else {
-                        System.out.print("Enter the task description: ");
-                        String description = scanner.nextLine();
-                        currentUser.getToDoList().addTask(description);
-                    }
-                    break;
-
-                case 4:
-                    if (currentUser == null) {
-                        System.out.println("Please login first!");
-                    } else {
-                        System.out.print("Enter the index of the task to delete: ");
-                        int taskIndex = scanner.nextInt();
-                        scanner.nextLine();
-                        currentUser.getToDoList().deleteTask(taskIndex - 1);
-                    }
-                    break;
-
-                case 5:
-                    if (currentUser == null) {
-                        System.out.println("Please login first!");
-                    } else {
-                        currentUser.getToDoList().displayTasks();
-                    }
-                    break;
-
-                case 6:
-                    currentUser = null;
-                    System.out.println("Logout successful!");
-                    break;
-
-                case 7:
-                    running = false;
-                    break;
-
-                default:
-                    System.out.println("Invalid choice!");
-            }
-        }
-
-        System.out.println("Goodbye!");
-        scanner.close();
     }
 
 }
